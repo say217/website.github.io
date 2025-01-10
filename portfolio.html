@@ -1,0 +1,1001 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sayak Samanta</title>
+  
+    <!-- Add Font Awesome link for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+
+  <!-- Link to the external CSS file -->
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Root Variables */
+:root {
+  --bg-color-light: #c1f7f5;
+  --bg-color-dark: #2c2c2c;
+  --text-color-light: #333;
+  --text-color-dark: #fff;
+  --nav-bg-light: #fff;
+  --nav-bg-dark: #444;
+  --accent-color: #34efdf;
+}
+
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  
+  padding: 20px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  background-color:black;
+  background-size: cover; /* Ensures the image covers the entire background */
+  background-position: center; /* Center the background image */
+  
+  background-image:url("https://i.pinimg.com/736x/40/59/4b/40594b873c4c2d00095f1eeecf36f61b.jpg");
+  
+  background-size:cover;
+}
+  
+
+
+/* Dark Mode Styles */
+body.dark {
+  background-image:url("/storage/emulated/0/Pictures/100PINT/Pins/de691fb839eaf89420460707bd7d8712.jpg");
+}
+
+.dark .nav-links,
+.dark section,
+.dark .contact-form {
+  background-color: rgba(250,250,250,0.9);
+ 
+}
+  .dark .
+
+.dark .nav-links li a,
+.dark .profile-name {
+  color: var(--text-color-dark);
+}
+
+/* Toggle Button Styles */
+.toggle-button {
+  position: absolute;
+  right: 20px;
+  top: 15px;
+  background-color: var(--text-color-light);
+  color: var(--bg-color-light);
+  border: none;
+  border-radius: 50px;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark .toggle-button {
+  background-color: var(--text-color-dark);
+  color: var(--bg-color-dark);
+}
+  
+  
+/* Navigation Styles */
+.nav-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--nav-bg-light);
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Navigation items */
+.nav-links li {
+  list-style: none;
+  margin: 0 10px;
+}
+
+.nav-links li a {
+  position: relative;
+  color: var(--text-color-light);
+  font-size: 18px;
+  font-weight: 500;
+  padding: 6px 0;
+  text-decoration: none;
+}
+
+.nav-links li a:before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: var(--accent-color);
+  border-radius: 12px;
+  transition: all 0.4s ease;
+}
+
+.nav-links li a:hover:before {
+  width: 100%;
+}
+
+/* Responsive Navigation Bar for Smaller Screens */
+@media (max-width: 768px) {
+  /* Stack the nav links vertically on mobile */
+  .nav-links {
+    flex-direction: column;
+    padding: 0px;
+    width: 100%;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  .nav-links li {
+    margin: 5px 0;
+  }
+
+  .nav-links li a {
+    font-size: 16px;
+    padding: 8px 0;
+  }
+}
+
+/* Navigation on very small screens (like mobile) */
+@media (max-width: 480px) {
+  .nav-links {
+    padding: 5px;
+    width: 100%;
+  }
+
+  .nav-links li {
+    margin: 4px 0;
+  }
+
+  .nav-links li a {
+    font-size: 14px;
+    padding: 5px 0;
+  }
+}
+
+/* Sidebar Styles */
+  .sidebar {
+  display: block;
+  position: fixed;
+  left: -250px; /* Start hidden off-screen */
+  top: 0;
+  width: 180px;
+  height: 100%;
+  background: var(--nav-bg-light);
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+  z-index: 1001;
+  padding: 15px;
+  transition: left 0.4s ease, background-color 0.3s ease, box-shadow 0.3s ease; /* Adjusted transition duration for smoother effect */
+}
+
+.sidebar.active {
+  left: 0; /* Slide into view */
+  background-color: rgba(30, 30, 30, 0.9); /* Darker background on activation */
+  box-shadow: 5px 0 15px rgba(0, 0, 0, 0.7); /* Adjust shadow for dark mode */
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  opacity: 0; /* Start hidden */
+  transform: translateY(-20px); /* Start slightly higher */
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Transition for opacity and position */
+}
+
+.sidebar.active ul {
+  opacity: 1; /* Fade in */
+  transform: translateY(0); /* Slide down into position */
+}
+
+.sidebar ul li {
+  margin: 20px 0;
+}
+
+.sidebar ul li a {
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  transition: color 0.3s ease; /* Smooth color transition for links */
+}
+
+.sidebar.active ul li a:hover {
+  color: var(--accent-color); /* Change link color on hover when active */
+}
+
+/* Basic hamburger styling */
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 25px;
+  cursor: pointer;
+}
+
+.hamburger span {
+  width: 100%;
+  height: 4px;
+  background-color: white;
+  border-radius: 5px;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+/* Add styles for when the hamburger is active */
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Hamburger Menu for Mobile */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  padding: 10px;
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  color:white;
+  z-index: 1000;
+}
+
+.hamburger div {
+  width: 25px;
+  height: 3px;
+  background-color: var(--text-color-light);
+  margin: 4px;
+  transition: all 0.3s ease;
+ 
+}
+
+body.dark .hamburger div {
+  background-color: var(--text-bg-light);
+}
+
+.hamburger.active div {
+  background-color: var(--text-color-light);
+}
+
+/* Display the hamburger for smaller screens */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+}
+
+/* Contact Form */
+.contact-form {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+ 
+  margin: 20px auto;
+  padding: 20px;
+  background: rgba(0,0,0,0.8);
+  border-radius: 12px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  font-size: 16px;
+  background-color:rgba(0,0,0,0.8);
+  color :white;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.contact-form textarea {
+  resize: vertical;
+  
+ min-height: 100px;
+}
+  body.contact-form textarea{
+      width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  font-size: 16px;
+  background-color:rgba(250,250,250,0.9);
+  color :black;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+  
+
+.contact-form input[type="submit"] {
+  background: linear-gradient(to bottom right, #EF4765, #FF9A5A);
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 16px;
+  position: absolute;
+  bottom: -50px;
+  right: 5px;
+  width: 150px;
+  transition: box-shadow 0.2s ease-in-out;
+  user-select: none;
+}
+
+.contact-form input[type="submit"]:hover {
+  background-color: #28cac5;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Section Styles */
+section {
+  max-width: 1200px;
+  margin: 10px auto;
+  padding: 5px;
+  background-color:rgba(0, 0, 0, 0.8);
+  border-radius: 12px;
+  border:1px solid orange;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.6s ease-out;
+}
+
+section.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Scroll specific styles */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Light Mode Section Backgrounds */
+section:nth-child(even) {
+  background-color:rgba(0,0,0,0.7);
+}
+
+section:nth-child(odd) {
+  background-color:rgba(0,0,0,0.7);
+}
+
+/* Dark Mode Section Backgrounds */
+body.dark section:nth-child(even) {
+  background-color: rgba(250,250,250,0.8);
+  /* Dark grey for dark mode */
+}
+
+body.dark section:nth-child(odd) {
+  background-color:rgba(250,250,250,0.8); 
+  /* Slightly darker grey for odd sections in dark mode */
+}
+
+/* Dark Mode Text Color */
+  
+
+h2 {
+  font-size: 26px;
+  margin-bottom: 10px;
+  
+}
+  section h5{
+    color:white;
+  }
+  .dark section h5{
+    color:black;
+  }
+
+section p {
+  font-size: 15px;
+  line-height: 1.6;
+  color:white;
+}
+ .dark section p {
+  font-size: 15px;
+  line-height: 1.6;
+  color:black;
+}
+
+  
+
+/* Profile Section */
+.profile-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px auto;
+  max-width: 800px;
+  text-align: center;
+}
+
+.profile-photo {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 20px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+  border: 4px solid white; /* Default border color */
+}
+
+.dark .profile-photo {
+  border: 4px solid white; /* Border color for dark mode */
+}
+
+.profile-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-name {
+  font-size: 28px;
+  margin:-10px 0px 0px -10px;
+
+
+}
+ 
+ 
+
+/* Footer */
+
+/* Responsive styles for small screens */
+@media (max-width: 768px) {
+.body {
+  background-image:url('https://i.pinimg.com/736x/40/59/4b/40594b873c4c2d00095f1eeecf36f61b.jpg')
+}
+  .nav-links {
+    display: none;
+  }
+  
+  .sidebar {
+    display: block;
+  }
+
+  .profile-photo {
+    width: 100px;
+    height: 100px;
+  }
+
+  .contact-form input[type="submit"] {
+    width: 100px;
+    font-size: 12px;
+  }
+  
+}
+
+@media (max-width: 480px) {
+  section {
+    margin: 20px 5px 5px 5px;
+    padding: 15px;
+  }
+
+  .profile-photo {
+    width: 160px;
+    height: 160px;
+  }
+
+  .profile-name {
+    font-size: 20px;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+
+  .contact-form input[type="submit"] {
+    width: 90px;
+    font-size: 10px;
+  }
+}
+footer {
+            text-align: center;
+            background-color: #777;
+            padding:8px;
+            bottom: 0;
+            width:355px;
+            height:60px;
+            color: #fff;
+            font-size: 14px;
+            
+        }
+
+        footer p {
+            margin: 1px;
+        }
+   .whatsapp-link a {
+  display: inline-block;
+  padding: 0.04px 3.5px;
+  background-color: #25D366; /* WhatsApp green color */
+  color: white;
+  border-radius: 50px;
+  margin-left: -2px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.whatsapp-link a:hover {
+  background-color: #128C7E; /* Darker green on hover */
+}
+  section-projects   p {
+    color: white;
+  }
+  body.dark section-projects   p {
+    color:black;
+  }
+  
+@import url(https://fonts.googleapis.com/css?family=Inter);
+
+
+
+.button {
+  -webkit-appearance: none;
+  appearance: none;
+  vertical-align: middle;
+  color: white;
+  font: inherit;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+  text-align: inherit;
+  text-transform: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:focus {
+  outline-style: solid;
+  outline-color: transparent;
+}
+
+
+
+
+.button {
+  position: relative;
+  border: 1px solid orange;
+  border-radius: 12px;
+  padding: 8px;
+  margin-left:190px;
+  margin-top:-50px;
+  transition-property: border-color;
+  transition-duration: .2s;
+  cursor: pointer;
+  
+  &:hover,
+  &:focus-visible {
+    border-color: transparent;
+    
+    &::before {
+      opacity: 1;
+    }
+  }
+  
+  &:active {
+    &::after {
+      opacity: 1;
+    }
+  }
+}
+
+.button::before,
+.button::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  transition-property: opacity;
+}
+
+.button::before {
+  box-shadow:
+    0 0 2px #fff,
+    0 -2px 6px #f16427,
+    2px 0 6px #36ff00,
+    -2px 0 6px #e22d91,
+    0 2px 6px #3f2aff;
+  transition-duration: .2s;
+}
+
+.button::after {
+  box-shadow:
+    0 0 8px 4px #fff,
+    0 -4px 12px 4px #f16427,
+    0 4px 12px 4px #3f2aff,
+    -4px 0 12px 4px #e22d91,
+    4px 0 12px 4px #aeff26;
+  transition-duration: .4s;
+}
+  </style>
+  <link rel="stylesheet" href="web.sayak_2.css">
+  <link rel="stylesheet" href="web.sayak_3.css">
+  <link rel="stylesheet" href="web.sayak_4.css">
+  <link rel="stylesheet" href="web.sayak_5.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+</head>
+<body>
+ 
+  <!-- Hamburger Menu for Mobile Navigation -->
+  <div class="hamburger menu-btn" style="color:white">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <!-- Dark Mode Toggle Button -->
+  <button class="toggle-button" onclick="toggleTheme()">Dark </button>
+
+  <!-- Profile Section with Photo and Name -->
+  <div class="profile-section">
+     
+    <div class="profile-photo">
+     <img src="https://img.freepik.com/premium-photo/esport-logo-design-cute-lion-vector-illustration-t-shirt-design-stocker-logo-banner-etc_83925-370.jpg" alt="Person Icon" />
+    </div>
+      
+    </div>
+   <center>
+    <div class="profile-name">
+      <h2 style="position: relative; font-weight:900;font-family: 'Roboto', sans-serif;    background: linear-gradient(90deg, #00c6ff, #0072ff); -webkit-background-clip: text; color: transparent; text-align: left; display: inline-block; ">
+        Sayak Samanta </h2>
+    </div>
+    </center>
+  </div>
+
+  <!-- Sidebar Navigation -->
+  <!-- Sidebar Navigation -->
+<!-- Sidebar Navigation -->
+<div id="slide-bars" class="sidebar">
+  <!-- Sidebar content -->
+  <ul class="slidebar">
+   <li><h2>Menu</h2></li><br><br>
+ 
+    <li><a href="#profile"><i class="glyphicon glyphicon-user"></i> Profile</a></li>
+    <li><a href="#projects"><i class="fas fa-file-alt"></i> Projects</a></li>
+    <li><a href="#skills"><i class="fas fa-cogs"></i> Skills</a></li>
+    <li><a href="#academics"><i class="fas fa-graduation-cap"></i> Academics</a></li>
+    <li><a href="#Articles"><i class="fas fa-newspaper"></i> Articles</a></li>
+   
+    <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+    <li><a><i class="fas fa-phone-alt"></i> My Contact :</a></li>
+    <li><a> +91 8348876903</a></li>
+  </ul>
+</div>
+
+<!-- Link Font Awesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<!-- Bootstrap CSS for Glyphicon icons -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- Optional: Add custom CSS for spacing -->
+
+
+
+<!-- Link Font Awesome for icons -->
+
+  
+  <!-- Top Navigation Bar -->
+  <div class="navbar" id="navbar">
+    <ul class="nav-links">
+      <li><a href="#profile">profile</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#academics">Academics</a></li>
+      <li><a href="#Articles">Articles</a></li>
+    <li><a href="#Certification">Certification</a></li>
+   
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- Profile Section -->
+  <section id="profile">
+    <!-- Profile Section -->
+
+    
+    <h3 style="
+    font-size: 21px; 
+    font-weight: 700; 
+    text-transform: uppercase; 
+    background: linear-gradient(50deg, #f49b00, #ff7f00, #7fff00, #00ff7f, #00ffff, #007fff, #0000ff); 
+    background-size: 400% 400%; 
+    -webkit-background-clip: text; 
+    background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+    animation: gradient-animation 5s ease infinite; 
+    text-shadow: none;">
+    <a href="https://say217.github.io/sayak.github.io/profile" style="color:white; display: flex; align-items: center;">
+        <img src="https://cdn1.iconfinder.com/data/icons/avatars-55/100/avatar_profile_user_music_headphones_shirt_cool-512.png" alt="User Icon" style="width: 36px; height: 36px; border-radius: 50%; margin-right: 10px; margin-bottom:8px;">
+        PROFILE
+    </a>
+</h3>
+
+
+
+    <h5>Welcome to my portfolio!!</h5>
+    <p>I'm Sayak Samanta, an engineering student at the University of Engineering and Management. I am passionate about technology and dedicated to enhancing my skills in various fields, particularly artificial intelligence and machine learning. </p>
+
+    <!-- Add LinkedIn and X profile links -->
+    <div class="social-links">
+      <ul >
+        
+          <li><a href="https://www.linkedin.com/in/sayak-samanta-64391a316" target="_blank" class="social-icon">
+            <i class="fab fa-linkedin"></i> LinkedIn</a></li>
+           <li><a href="https://x.com/AlienX1751669" target="_blank" class="social-icon">
+                <i class="fab fa-twitter"></i></a></li>
+           <li><a href="https://github.com/say217" target="_blank" class="github-icon">
+            <i class="fab fa-github"></i></a>
+             
+             <!-- WhatsApp Link -->
+             <li><div class="whatsapp-link">
+        <a href="https://wa.me/918348876903" target="_blank">
+       <i class="fab fa-whatsapp"></i>
+      </a>
+      </div>
+         </li>
+
+        </ul>
+       
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section class="peojects"id="projects">
+    <h3 style="
+    font-size: 21px; 
+    font-weight: 700; 
+    text-transform: uppercase; 
+    background: linear-gradient(50deg, #f49b00, #ff7f00, #7fff00, #00ff7f, #00ffff, #007fff, #0000ff); 
+    background-size: 400% 400%; 
+    -webkit-background-clip: text; 
+    background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+    animation: gradient-animation 5s ease infinite; 
+    text-shadow: none;">
+    <a href="https://say217.github.io/sayak.github.io/projects" style="color:white; display: flex; align-items: center;">
+        <img src="https://cdn-icons-png.flaticon.com/512/7442/7442701.png" alt="User Icon" style="width: 36px; height: 36px; border-radius: 50%; margin-right: 10px; margin-bottom:8px;">
+        PROJECTS
+    </a>
+</h3>
+    <p> I creartes some project and this is time to apply my knowledge and creativity to solve real-world problems. With a strong foundation in engineering principles, I'm excited to explore innovative solutions and contribute to advancements in technology.</p>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills">
+    
+      <h3 style="
+      font-size: 21px; 
+      font-weight: 700; 
+      text-transform: uppercase; 
+      background: linear-gradient(50deg, #f49b00, #ff7f00, #7fff00, #00ff7f, #00ffff, #007fff, #0000ff); 
+      background-size: 400% 400%; 
+      -webkit-background-clip: text; 
+      background-clip: text; 
+      -webkit-text-fill-color: transparent; 
+      animation: gradient-animation 5s ease infinite; 
+      text-shadow: none;">
+      <a href="https://say217.github.io/sayak.github.io/skills" style="color:white; display: flex; align-items: center;">
+          <img src="https://cdn-icons-png.flaticon.com/512/1876/1876397.png" alt="User Icon" style="width: 36px; height: 36px; border-radius: 50%; margin-right: 10px; margin-bottom:8px;">
+          SKILLS
+      </a>
+  </h3>
+    <p>I have developed skills in Docker, Python, GitHub, and various other technologies, which empower me to create innovative solutions. With a strong foundation in engineering principles</p>
+  </section>
+
+  <!-- Academics Section -->
+  <section id="academics">
+    <h3 style="
+    font-size: 21px; 
+    font-weight: 700; 
+    text-transform: uppercase; 
+    background: linear-gradient(50deg, #f49b00, #ff7f00, #7fff00, #00ff7f, #00ffff, #007fff, #0000ff); 
+    background-size: 400% 400%; 
+    -webkit-background-clip: text; 
+    background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+    animation: gradient-animation 5s ease infinite; 
+    text-shadow: none;">
+    <a href="https://say217.github.io/sayak.github.io/academics" style="color:white; display: flex; align-items: center;">
+        <img src="https://www.pngkey.com/png/full/131-1311026_school-icon-png.png" alt="User Icon" style="width: 36px; height: 36px; border-radius: 50%; margin-right: 10px; margin-bottom:8px;">
+        ACADEMICS
+    </a>
+</h3>
+    <p>I have a record of good academic performance, consistently achieving high grades and demonstrating a strong understanding of engineering principles. My dedication to my studies reflects my commitment to learning and excelling in my field.</p>
+  </section>
+    
+    
+      <section id="Articles">
+        <h3 style="
+    font-size: 21px; 
+    font-weight: 700; 
+    text-transform: uppercase; 
+    background: linear-gradient(50deg, #f49b00, #ff7f00, #7fff00, #00ff7f, #00ffff, #007fff, #0000ff); 
+    background-size: 400% 400%; 
+    -webkit-background-clip: text; 
+    background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+    animation: gradient-animation 5s ease infinite; 
+    text-shadow: none;">
+    <a href="https://say217.github.io/sayak.github.io/article" style="color:white; display: flex; align-items: center;">
+        <img src="https://pressbooks.pub/app/uploads/sites/1163/2022/08/magazine-icon.png" alt="User Icon" style="width: 36px; height: 36px; border-radius: 50%; margin-right: 10px; margin-bottom:8px;">
+        ARTICALS
+    </a>
+</h3>
+    <p>I work on some review articles, allowing me to delve into various topics and gain a deeper understanding of emerging trends in technology and engineering. This experience enhances my research skills and keeps me informed about the latset development in my field.</p>
+  </section>
+    
+    
+      <section id="Certification">
+        <h3 style="
+        font-size: 21px; 
+        font-weight: 700; 
+        text-transform: uppercase; 
+        background: linear-gradient(50deg, #f49b00, #ff7f00, #7fff00, #00ff7f, #00ffff, #007fff, #0000ff); 
+        background-size: 400% 400%; 
+        -webkit-background-clip: text; 
+        background-clip: text; 
+        -webkit-text-fill-color: transparent; 
+        animation: gradient-animation 5s ease infinite; 
+        text-shadow: none;">
+        <a href="https://say217.github.io/sayak.github.io/certificate" style="color:white; display: flex; align-items: center;">
+            <img src="https://img.freepik.com/premium-vector/certificate-with-ribbons-vector-clip-art-isolated-transparent-background_764382-1431.jpg" alt="User Icon" style="width: 36px; height: 36px; border-radius: 50%; margin-right: 10px; margin-bottom:8px;">
+            CERTIFICATION
+        </a>
+    </h3>
+    <p>    
+      
+      I have obtained several certifications that validate my skills and knowledge in various areas of technology. These certifications not only enhance my qualifications but also demonstrate my learning path.
+    </p>  </section>
+  <!-- Contact Section -->
+  <section id="contact">
+    <h3><i class="fas fa-envelope"></i> Contact</h3>
+    <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="857d463f-0341-445a-8727-a026e614f952">
+      <input type="text" name="name" id="name" placeholder="Your Name" required>
+      <input type="tel" name="phone" id="phone" placeholder="Your Contact Number" required>
+      <input type="email" name="email" id="email" placeholder="Your Email Address" required>
+      <textarea name="remarks" id="remarks" rows="5" placeholder="Your Remarks"></textarea>
+    <input type="submit" value="Submit">
+    </form>
+    <div>.</div> 
+    <div>.</div> 
+     <div></div> 
+    <div>.</div>
+  </section>
+
+  <!-- Link to External JavaScript Files -->
+  <script>
+    
+
+function toggleTheme() {
+      var body = document.body;
+      body.classList.toggle("dark");
+
+      var button = document.querySelector(".toggle-button");
+      if (body.classList.contains("dark")) {
+        button.textContent = "Light";
+      } else {
+        button.textContent = "Dark";
+      }
+}
+    
+ </script>
+  <script>
+  
+  document.querySelector('.contact-form').addEventListener('submit', function(event)){
+      event.preventDefault(); // Prevent form submission
+
+      // Get form values
+      var name = document.getElementById('name').value;
+      var phone = document.getElementById('phone').value;
+      var email = document.getElementById('email').value;
+      var remarks = document.getElementById('remarks').value;
+
+      // Check if all fields are filled
+      if (name === "" || phone === "" || email === "") {
+        alert("Please fill in all the required fields.");
+        return;
+      }
+
+      // Display a confirmation message with entered details
+      alert("Thank you, " + name + "!\n" +
+            "Phone: " + phone + "\n" +)
+              return;
+      }
+     </script>
+  <script>
+    
+    // Function to toggle the sidebar visibility
+function toggleSidebar() {
+    const sidebar = document.getElementById('slide-bars'); // Get the sidebar element
+    sidebar.classList.toggle('active'); // Toggle the active class to show/hide the sidebar
+}
+
+// Function to close the sidebar if the user clicks outside of it
+function closeSidebar(event) {
+    const sidebar = document.getElementById('slide-bars'); // Get the sidebar element
+    const hamburger = document.querySelector('.hamburger'); // Get the hamburger menu element
+
+    // Check if the clicked element is outside the sidebar and hamburger menu
+    if (!sidebar.contains(event.target) && !hamburger.contains(event.target)) {
+        sidebar.classList.remove('active'); // Remove the active class to hide the sidebar
+    }
+}
+
+// Add event listener to the document for clicks
+document.addEventListener('click', closeSidebar);
+
+// Add event listener to the hamburger menu to toggle the sidebar
+document.querySelector('.hamburger').addEventListener('click', toggleSidebar);
+
+
+
+    </script>
+  <script>
+    // Function to reveal sections on scroll
+function revealOnScroll() {
+  const sections = document.querySelectorAll('section');
+  
+  sections.forEach(section => {
+    const sectionTop = section.getBoundingClientRect().top;
+    const windowHeight = window.innerHeight;
+    
+    if (sectionTop < windowHeight - 100) { // Trigger 100px before reaching the section
+      section.classList.add('show');
+    }
+  });
+}
+
+// Call the function on scroll
+window.addEventListener('scroll', revealOnScroll);
+
+// Trigger the effect when the page loads
+document.addEventListener('DOMContentLoaded', revealOnScroll);
+
+    </script>
+  
+    
+    <script>
+      // Toggle the hamburger menu
+const menuBtn = document.querySelector('.hamburger');
+menuBtn.addEventListener('click', () => {
+  menuBtn.classList.toggle('active');
+});
+
+    </script>
+ <footer>
+  <p>© 2024 Sayak Samanta. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
+
